@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Your Name",
   role: "Fashion Designer",
   tagline: "Selected work in womenswear and textile design.",
-  email: "hello@thejhaus.com",
+  email: "jasminemarkinson@gmail.com",
   location: "New York, NY",
   domain: "thejhaus.com",
   social: {
