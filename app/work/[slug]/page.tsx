@@ -2,9 +2,17 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ViewTransition } from "react";
 import { projects } from "@/data/projects";
+import CollectionGallery from "@/components/CollectionGallery";
 
 type Params = Promise<{ slug: string }>;
+
+const directional = {
+  "nav-forward": "nav-forward",
+  "nav-back": "nav-back",
+  default: "none",
+} as const;
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -31,42 +39,53 @@ export default async function ProjectPage({ params }: { params: Params }) {
   if (!project) notFound();
 
   return (
-    <div className="mx-auto max-w-4xl px-6 py-16 sm:py-20">
+    <div className="mx-auto max-w-6xl px-6 py-16 sm:py-20">
       <Link
-        href="/"
+        href="/work"
+        transitionTypes={["nav-back"]}
         className="text-sm uppercase tracking-wide text-muted transition-colors hover:text-foreground"
       >
         &larr; All work
       </Link>
 
-      <div className="mt-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-        <h1 className="font-serif text-3xl sm:text-4xl">{project.title}</h1>
-        <span className="text-sm text-muted">
-          {project.category} &middot; {project.year}
-        </span>
-      </div>
+      {/* The cover morphs from the grid thumbnail — kept a sibling of the
+          directional wrapper below so the morph and the slide stay independent
+          view-transition groups rather than one nested inside the other. */}
+      <ViewTransition name={`project-${project.slug}`} share="morph">
+        <div className="relative mt-8 aspect-4/5 overflow-hidden bg-border sm:aspect-16/9">
+          <Image
+            src={project.heroImage ?? project.coverImage}
+            alt={project.title}
+            fill
+            preload
+            sizes="(min-width: 1024px) 1152px, 100vw"
+            className="object-cover"
+            style={{ objectPosition: project.heroPosition ?? "center" }}
+          />
+        </div>
+      </ViewTransition>
 
-      <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
-        {project.description}
-      </p>
-
-      <div className="mt-12 flex flex-col gap-12">
-        {project.images.map((src, index) => (
-          <div
-            key={src + index}
-            className="relative aspect-4/5 overflow-hidden bg-border sm:aspect-16/10"
-          >
-            <Image
-              src={src}
-              alt={`${project.title} — image ${index + 1}`}
-              fill
-              preload={index === 0}
-              sizes="(min-width: 640px) 800px, 100vw"
-              className="object-cover"
-            />
+      {/* Title, description, and gallery slide in from the right on forward
+          navigation and out on back, while the cover above morphs. Kept a
+          sibling of the morph (never nested) so the two transitions compose. */}
+      <ViewTransition enter={directional} exit={directional} default="none">
+        <div>
+          <div className="mt-8 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+            <h1 className="font-serif text-3xl sm:text-4xl">{project.title}</h1>
+            <span className="text-sm text-muted">
+              {project.category} &middot; {project.year}
+            </span>
           </div>
-        ))}
-      </div>
+
+          <p className="mt-6 text-lg leading-relaxed text-muted">
+            {project.description}
+          </p>
+
+          <div className="mt-12">
+            <CollectionGallery images={project.images} title={project.title} />
+          </div>
+        </div>
+      </ViewTransition>
     </div>
   );
 }

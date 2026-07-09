@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1250" viewBox="0 0 1000 1250">
-  <rect width="1000" height="1250" fill="#efece6"/>
-  <rect x="0.5" y="0.5" width="999" height="1249" fill="none" stroke="#d8d4cc" stroke-width="1"/>
-  <text x="500" y="600" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#8a867d">Portrait</text>
-  <text x="500" y="650" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#a8a49b">Replace in public/portfolio</text>
+  <rect width="1000" height="1250" fill="#161513"/>
+  <rect x="0.5" y="0.5" width="999" height="1249" fill="none" stroke="#262523" stroke-width="1"/>
+  <text x="500" y="600" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#8f8d86">Portrait</text>
+  <text x="500" y="650" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" fill="#6a6863">Replace in public/portfolio</text>
 </svg>

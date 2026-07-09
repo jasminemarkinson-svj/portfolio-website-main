@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf9f7;
-  --foreground: #1a1a1a;
-  --muted: #6b6b64;
-  --border: #e4e2dd;
+  --background: #0a0a09;
+  --foreground: #f4f3ef;
+  --muted: #8f8d86;
+  --border: #262523;
 }
 
 @theme inline {
@@ -25,4 +25,118 @@ body {
 ::selection {
   background: var(--foreground);
   color: var(--background);
+}
+
+/* Keep the header fixed in place during view transitions so only the
+   page content underneath appears to move. */
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 100;
+}
+::view-transition-old(site-header) {
+  display: none;
+}
+::view-transition-new(site-header) {
+  animation: none;
+}
+
+/* Soften the cover-image → hero-image morph between the work grid and a
+   collection page with a brief blur, hiding pixel-level interpolation. */
+::view-transition-group(.morph) {
+  animation-duration: 500ms;
+}
+::view-transition-image-pair(.morph) {
+  animation-name: morph-blur;
+}
+@keyframes morph-blur {
+  30% {
+    filter: blur(4px);
+  }
+}
+
+/* Directional page transitions: forward navigations (grid → collection) slide
+   content out to the left and the new page in from the right; back navigations
+   reverse. The header and any shared morph element (the cover image) are
+   tracked as their own groups, so only the surrounding content slides. */
+::view-transition-old(.nav-forward) {
+  animation: nav-exit-left 280ms ease-in both;
+}
+::view-transition-new(.nav-forward) {
+  animation: nav-enter-right 460ms cubic-bezier(0.23, 1, 0.32, 1) 120ms both;
+}
+::view-transition-old(.nav-back) {
+  animation: nav-exit-right 280ms ease-in both;
+}
+::view-transition-new(.nav-back) {
+  animation: nav-enter-left 460ms cubic-bezier(0.23, 1, 0.32, 1) 120ms both;
+}
+
+@keyframes nav-exit-left {
+  to {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+}
+@keyframes nav-enter-right {
+  from {
+    opacity: 0;
+    transform: translateX(56px);
+  }
+}
+@keyframes nav-exit-right {
+  to {
+    opacity: 0;
+    transform: translateX(56px);
+  }
+}
+@keyframes nav-enter-left {
+  from {
+    opacity: 0;
+    transform: translateX(-56px);
+  }
+}
+
+/* Every route change slides its new content in from the right (via
+   app/template.tsx). The `overflow-x-hidden` on <main> keeps the 40px offset
+   from ever showing a horizontal scrollbar mid-animation. */
+.page-enter {
+  animation: page-enter 450ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Collection switcher dropdown: scales in from its trigger (top-right),
+   quick and origin-aware. */
+.animate-dropdown {
+  animation: dropdown-in 150ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+@keyframes dropdown-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter {
+    animation: none;
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
 }

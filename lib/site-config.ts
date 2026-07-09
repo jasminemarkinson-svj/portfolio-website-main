@@ -1,16 +1,13 @@
 export const siteConfig = {
-  name: "Your Name",
+  name: "Jasmine Markinson",
   role: "Fashion Designer",
-  tagline: "Selected work in womenswear and textile design.",
+  tagline: "Selected collections in womenswear, textiles, and sustainable design.",
   email: "jasminemarkinson@gmail.com",
-  location: "New York, NY",
+  location: "Brooklyn, NY",
   domain: "thejhaus.com",
-  social: {
-    instagram: "https://instagram.com/yourhandle",
-    linkedin: "https://linkedin.com/in/yourhandle",
-  },
   nav: [
     { label: "Work", href: "/" },
+    { label: "Process", href: "/process" },
     { label: "About", href: "/about" },
     { label: "Resume", href: "/resume" },
     { label: "Contact", href: "/contact" },
