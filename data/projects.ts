@@ -123,7 +123,7 @@ export const projects: Project[] = [
     year: "2023",
     category: "Upcycled",
     description:
-      "A short description of this collection — the concept, materials, and process behind the work.",
+      "Created for the Tory Burch Upcycle Challenge, this project reimagines donated garments through playful transformation and unconventional styling. By reversing the expected roles of clothing, a shirt becomes a skirt and shorts become a top, creating a whimsical narrative of dressing in haste. The design celebrates creativity through upcycling, challenging traditional garment function while proving that unexpected combinations can become both cohesive and expressive.",
     coverImage: "/portfolio/upcycle-project/01.jpg",
     images: [
       { src: "/portfolio/upcycle-project/01.jpg", width: 2400, height: 1601 },
