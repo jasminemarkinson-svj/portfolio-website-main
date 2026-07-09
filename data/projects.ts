@@ -19,6 +19,9 @@ export type Project = {
   // faces in frame. Defaults to "center".
   heroPosition?: string;
   images: ProjectImage[];
+  // Optional labeled sub-galleries. When present, the project page renders each
+  // section under its own heading instead of the single `images` gallery.
+  sections?: { title: string; images: ProjectImage[] }[];
 };
 
 // Ordered newest → oldest; this order drives the /work overview and the WORK
@@ -98,6 +101,23 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "eyes-on-you",
+    title: "Eyes on You",
+    year: "2023",
+    category: "Collection",
+    description:
+      "Eyes on You offers a playful yet literal interpretation of the feeling of constantly being observed and judged. Adorned with eye motifs, the design transforms the gaze of others into a bold visual statement, exploring the tension between self-expression, perception, and the opinions that inevitably shape our experiences.",
+    coverImage: "/portfolio/eyes-on-you/02.jpg",
+    heroImage: "/portfolio/eyes-on-you/hero.jpg",
+    images: [
+      { src: "/portfolio/eyes-on-you/02.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/eyes-on-you/03.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/eyes-on-you/04.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/eyes-on-you/05.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/eyes-on-you/06.jpg", width: 2400, height: 1601 },
+    ],
+  },
+  {
     slug: "upcycle-project",
     title: "Upcycle Project",
     year: "2023",
@@ -113,18 +133,59 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "stitched-together",
+    title: "Stitched Together",
+    year: "2022",
+    category: "Collection",
+    description:
+      "Stitched Together reflects a period of personal growth and self-discovery, using fashion as a means of reconstructing identity. Through leather patchwork and a tank top embellished with sewing machine components, the look offers a literal expression of piecing myself back together. It captures the transition from high school to college, exploring the uncertainty, resilience, and evolving sense of self that accompanies the journey into adulthood.",
+    coverImage: "/portfolio/stitched-together/09.jpg",
+    heroImage: "/portfolio/stitched-together/02.jpg",
+    images: [
+      { src: "/portfolio/stitched-together/01.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/02.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/03.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/04.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/05.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/06.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/07.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/08.jpg", width: 2400, height: 1601 },
+      { src: "/portfolio/stitched-together/09.jpg", width: 2400, height: 1601 },
+    ],
+  },
+  {
     slug: "lingerie",
     title: "Lingerie",
     year: "2022",
     category: "Lingerie",
-    description:
-      "A short description of this collection — the concept, materials, and process behind the work.",
+    description: "",
     coverImage: "/portfolio/lingerie/01.jpg",
+    heroImage: "/portfolio/beaded-underwire-bra/01.jpg",
+    heroPosition: "50% 10%",
     images: [
       { src: "/portfolio/lingerie/01.jpg", width: 2400, height: 1601 },
       { src: "/portfolio/lingerie/02.jpg", width: 2400, height: 1601 },
       { src: "/portfolio/lingerie/03.jpg", width: 2400, height: 1601 },
       { src: "/portfolio/lingerie/04.jpg", width: 2400, height: 1601 },
+    ],
+    sections: [
+      {
+        title: "",
+        images: [
+          { src: "/portfolio/lingerie/01.jpg", width: 2400, height: 1601 },
+          { src: "/portfolio/lingerie/02.jpg", width: 2400, height: 1601 },
+          { src: "/portfolio/lingerie/03.jpg", width: 2400, height: 1601 },
+          { src: "/portfolio/lingerie/04.jpg", width: 2400, height: 1601 },
+        ],
+      },
+      {
+        title: "Beaded Underwire Bra",
+        images: [
+          { src: "/portfolio/beaded-underwire-bra/01.jpg", width: 2400, height: 1728 },
+          { src: "/portfolio/beaded-underwire-bra/02.jpg", width: 2400, height: 2061 },
+          { src: "/portfolio/beaded-underwire-bra/03.jpg", width: 1601, height: 2400 },
+        ],
+      },
     ],
   },
 ];

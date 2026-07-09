@@ -77,13 +77,33 @@ export default async function ProjectPage({ params }: { params: Params }) {
             </span>
           </div>
 
-          <p className="mt-6 text-lg leading-relaxed text-muted">
-            {project.description}
-          </p>
+          {project.description && (
+            <p className="mt-6 text-lg leading-relaxed text-muted">
+              {project.description}
+            </p>
+          )}
 
-          <div className="mt-12">
-            <CollectionGallery images={project.images} title={project.title} />
-          </div>
+          {project.sections ? (
+            <div className="mt-12 flex flex-col gap-16">
+              {project.sections.map((section, index) => (
+                <section key={section.title || index}>
+                  {section.title && (
+                    <h2 className="mb-6 font-serif text-2xl sm:text-3xl">
+                      {section.title}
+                    </h2>
+                  )}
+                  <CollectionGallery
+                    images={section.images}
+                    title={section.title || project.title}
+                  />
+                </section>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-12">
+              <CollectionGallery images={project.images} title={project.title} />
+            </div>
+          )}
         </div>
       </ViewTransition>
     </div>
